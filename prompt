@@ -1,14 +1,19 @@
 Suggest 5 concise commit messages for the following changes in my project.
-Use the format: `type: commit message` where `type` can be one of the following based on the nature of the changes:
-- `feat`: for adding new features
-- `fix`: for fixing bugs, typos, or issues
-- `chore`: for maintenance or non-functional changes
-- `style`: for code style changes (formatting, missing semi colons, etc.)
-- `ref`: for code refactoring
-- `perf`: for performance improvements
-- `docs`: for documentation updates
-- `build`: for changes that affect the build system or dependencies
-- `ci/cd`: for changes to CI/CD configuration files and scripts
+Use the format: `type(module name): commit message` where `type` can be one of the following based on the nature of the changes:
+- `feature(module name)`: for adding new features
+- `fix(module name)`: for fixing bugs, typos, or issues
+- `chore(module name)`: for maintenance or non-functional changes
+- `style(module name)`: for code style changes (formatting, missing semi colons, etc.)
+- `ref(module name)`: for code refactoring
+- `perf(module name)`: for performance improvements
+- `docs(module name)`: for documentation updates
+- `build(module name)`: for changes that affect the build system or dependencies
+- `ci/cd(module name)`: for changes to CI/CD configuration files and scripts
+
 Please strictly follow the `type` guidelines based on the description of the changes,
 and return only the commit messages without additional explanations and don't return my changes to me again just the commit message.
+if specific module or project has most meaningful changed please set its name or boundary of changes else remove Parentheses and module name, also i want just set last part of project name 
+
 i only want to see your suggested commit messages in the top of your response.
+
+
