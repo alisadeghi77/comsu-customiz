@@ -1,15 +1,6 @@
-# Define ANSI color codes equivalents in PowerShell
-$RED = "`e[31m"
-$GRAY = "`e[37m"
-$GREEN = "`e[32m"
-$ICYAN = "`e[96m"
-$YELLOW = "`e[33m"
-$IYELLOW = "`e[93m"
-$NC = "`e[0m"  # No Color
-
 # Check if the API key environment variable is set
 if (-not $env:GOOGLE_AI_STUDIO_API_KEY) {
-    Write-Host "${YELLOW}Error: The GOOGLE_AI_STUDIO_API_KEY environment variable is not set.${NC}"
+    Write-Host "Error: The GOOGLE_AI_STUDIO_API_KEY environment variable is not set." -ForegroundColor YELLOW
     exit 1
 }
 
@@ -36,7 +27,7 @@ function Generate-CommitMessages {
 
     # Check if the prompt file exists
     if (-not (Test-Path $PROMPT_FILE)) {
-        Write-Host "Error: $PROMPT_FILE file not found!"
+        Write-Host "Error: $PROMPT_FILE file not found!" -ForegroundColor RED
         exit 1
     }
 
@@ -81,7 +72,7 @@ function Commit-Message {
 
     # Display the messages with numbered options
     for ($i = 0; $i -lt $messages.Length; $i++) {
-        Write-Host "${IYELLOW}$($i+1). $($messages[$i])${NC}"
+        Write-Host "$($i+1). $($messages[$i])" -ForegroundColor YELLOW
     }
 
     # Prompt the user for their choice
@@ -90,7 +81,7 @@ function Commit-Message {
 
     # Check the user's choice
     if ($choice -eq "x") {
-        Write-Host "${RED}Exiting without committing.${NC}"
+        Write-Host "Exiting without committing." -ForegroundColor RED
         exit 0
     } elseif ($choice -gt 0 -and $choice -le $messages.Length) {
         $selected_message = $messages[$choice - 1]
@@ -99,11 +90,11 @@ function Commit-Message {
         $commit_output = git commit -m "$selected_message" 2>&1
 
         # Print the git output in the desired color
-        Write-Host "${GRAY}$commit_output${NC}"
+        Write-Host "$commit_output" -ForegroundColor GRAY
         Write-Host
-        Write-Host "${GREEN}Committed successfully.${NC}"
+        Write-Host "Committed successfully." -ForegroundColor GREEN
     } else {
-        Write-Host "${RED}Invalid choice. Exiting without committing.${NC}"
+        Write-Host "Invalid choice. Exiting without committing." -ForegroundColor RED
         exit 0
     }
 }
@@ -115,12 +106,12 @@ function Main {
 
     # If there are no changes, exit the script
     if (-not $changes) {
-        Write-Host "${YELLOW}No staged changes found.${NC}"
-        Write-Host "${YELLOW}You should first add at least one file to stage.${NC}"
+        Write-Host "No staged changes found." -ForegroundColor YELLOW
+        Write-Host "You should first add at least one file to stage." -ForegroundColor YELLOW
         exit 1
     }
 
-    Write-Host "${ICYAN}Generating the commit messages based on your changes ...${NC}"
+    Write-Host "Generating the commit messages based on your changes ..." -ForegroundColor Cyan
     Write-Host
 
     # Generate commit message suggestions
